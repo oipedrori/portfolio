@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedro Ittner | UX Designer</title>
+
+    <!-- Fonts: Plus Jakarta Sans (Titles) and Inter (Text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="light">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-name" style="color: #4D4C4B;">Pedro</span><span class="logo-lastname">RI</span>
+            </a>
+
+            <div class="nav-links">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
+                    <!-- Icon for Sun (Light Mode) / Moon (Dark Mode) will be handled by CSS/JS -->
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" style="display:none;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <a href="#projeto-1" class="btn btn-secondary">Ver projetos</a>
+                <a href="#contato" class="btn btn-primary">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="section hero fade-in">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <p class="hero-subtitle">UX DESIGNER • TECHNICAL PRODUCT SPECIALIST • MARKETING OPERATIONS</p>
+                    <h1 class="hero-title">Soluções técnicas que humanizam experiências digitais.</h1>
+                    <p class="hero-description">Designer e pós-graduando em UX Design no SENAC Brasil. Especialista em
+                        arquitetar soluções e otimizar jornadas de usuário — transitando entre Produto, Engenharia e
+                        Sucesso do Cliente com dados e IA.</p>
+                    <div class="hero-actions">
+                        <a href="#projeto-1" class="btn btn-primary btn-lg">Ver projetos</a>
+                        <a href="#sobre" class="btn btn-outline btn-lg">Sobre mim</a>
+                    </div>
+                </div>
+                <div class="hero-image parallax" data-speed="-2">
+                    <!-- The 3D Computer goes here -->
+                    <img src="assets/hero-computer.png" alt="Computador 3D Ilustração" id="hero-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre Mim Section -->
+        <section id="sobre" class="section sobre bg-light fade-in">
+            <div class="container sobre-container">
+                <!-- Profile Image on the Left -->
+                <div class="sobre-image parallax" data-speed="1">
+                    <!-- Profile Picture goes here -->
+                    <img src="assets/pedro-ittner.jpg" alt="Pedro Ittner" id="profile-img">
+                </div>
+                <div class="sobre-content">
+                    <p class="section-label">— QUEM SOU</p>
+                    <h2 class="section-title">Designer que pensa como estrategista</h2>
+                    <p>Designer e pós-graduando em UX Design no SENAC Brasil. Especialista em <strong>arquitetar
+                            soluções técnicas e otimizar jornadas de usuário</strong>, minha experiência transita entre
+                        Produto, Engenharia e Sucesso do Cliente.</p>
+                    <p>Utilizo a lógica de Operações e o repertório das Ciências Humanas para aplicar <strong>dados e IA
+                            em estratégias</strong> que garantem a usabilidade de produtos digitais complexos — do
+                        primeiro toque até a fidelização.</p>
+                    <p>Atualmente como <strong>Technical Product Specialist</strong> na Christian Vision, atuo como elo
+                        entre stakeholders e engenharia, traduzindo necessidades complexas em User Stories, fluxogramas
+                        e documentação funcional centrada no usuário.</p>
+
+                    <div class="skills-tags">
+                        <span class="tag">UX Design</span>
+                        <span class="tag">User Journey Mapping</span>
+                        <span class="tag">Figma</span>
+                        <span class="tag">HubSpot</span>
+                        <span class="tag">Automação & No-Code</span>
+                        <span class="tag">CRM & Dados</span>
+                        <span class="tag">Notion</span>
+                        <span class="tag">Produto & Gestão</span>
+                        <span class="tag">Localization UX</span>
+                        <span class="tag">A/B Testing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projetos Sections (Placeholders) -->
+        <section id="projeto-1" class="section projeto fade-in">
+            <div class="container project-container">
+                <p class="section-label">— PROJETO 1</p>
+                <h2 class="section-title">Jornada de Ativação: CV Outreach</h2>
+
+                <div class="project-description">
+                    <p>O <strong>CV Outreach</strong> utiliza inteligência geográfica e campanhas digitais para conectar
+                        pessoas com dúvidas sobre a fé cristã diretamente a igrejas parceiras na sua região, através de
+                        LPs evangelísticas. O desafio central foi estruturar como a equipe de parcerias atraía, engajava
+                        e treinava essas igrejas (o cliente B2B da jornada).</p>
+                    <p>Abaixo apresento o <strong>Service Blueprint</strong> interativo que redesenhei. O fluxo mapeia
+                        desde a Descoberta (Awareness) até o Relacionamento, sincronizando as interações do parceiro com
+                        as automações do sistema (HubSpot CRM) e os touchpoints humanos da equipe.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projeto-2" class="section projeto bg-light fade-in">
+            <div class="container project-content">
+                <div class="project-header">
+                    <p class="section-label">— PROJETO 2</p>
+                    <h2 class="section-title">Landing Pages Responsivas para Campanhas</h2>
+                </div>
+
+                <div class="project-description">
+                    <p>A CV desenvolve material evangelístico gratuito para igrejas utilizarem no evangelismo digital.
+                        As campanhas giram em torno de 3 assets principais: <strong>Vídeo evangelístico</strong>,
+                        <strong>eBook com reflexões</strong> e um <strong>Pacote de posts</strong> para redes sociais.
+                    </p>
+
+                    <p>Tudo isso era compilado em coleções sazonais (como Natal e Páscoa). Para isso, criávamos landing
+                        pages para divulgar e facilitar o acesso a esses assets. Simplesmente preenchendo um formulário,
+                        o usuário acessava diretamente o material para download via funil MRSS.</p>
+                </div>
+
+                <!-- Showcase Interativo: Browser Mockup -->
+                <div class="showcase-container">
+
+                    <!-- Controles Superiores: Seleção de Campanha e Device -->
+                    <div class="showcase-controls">
+                        <div class="campaign-tabs">
+                            <button class="tab-btn active" data-campaign="natal">
+                                <span class="tab-icon">🎄</span> De onde brota a Esperança
+                            </button>
+                            <button class="tab-btn" data-campaign="pascoa">
+                                <span class="tab-icon">✝️</span> Da Cruz à Luz
+                            </button>
+                        </div>
+
+                        <div class="device-toggle">
+                            <button class="device-btn active" data-device="desktop" title="Visualização Desktop">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                                <span>Desktop</span>
+                            </button>
+                            <button class="device-btn" data-device="mobile" title="Visualização Mobile">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                </svg>
+                                <span>Mobile</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Browser Window Mockup -->
+                    <div class="browser-mockup desktop-mode" id="browserWindow">
+                        <!-- Top Bar Chrome -->
+                        <div class="browser-topbar">
+                            <div class="browser-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <div class="browser-address">
+                                <span class="lock-icon">🔒</span>
+                                <span id="mockupUrl">br.cvglobal.co/colecao-natal</span>
+                            </div>
+                        </div>
+
+                        <!-- Janela de visualização com scroll interno -->
+                        <div class="browser-viewport">
+                            <!-- Natal -->
+                            <img src="assets/natal_desktop.png" class="mockup-img active" id="img-natal-desktop"
+                                alt="Landing Page de Natal Desktop">
+                            <img src="assets/natal_mobile.png" class="mockup-img" id="img-natal-mobile"
+                                alt="Landing Page de Natal Mobile">
+
+                            <!-- Páscoa -->
+                            <img src="assets/pascoa_desktop.png" class="mockup-img" id="img-pascoa-desktop"
+                                alt="Landing Page de Páscoa Desktop">
+                            <img src="assets/pascoa_mobile.png" class="mockup-img" id="img-pascoa-mobile"
+                                alt="Landing Page de Páscoa Mobile">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projeto-3" class="section projeto fade-in">
+            <div class="container">
+                <p class="section-label">— PROJETO 3</p>
+                <h2 class="section-title">Workflows de Comunicação Automática</h2>
+            </div>
+        </section>
+
+        <section id="projeto-4" class="section projeto fade-in">
+            <div class="container">
+                <p class="section-label">— PROJETO 4</p>
+                <h2 class="section-title">Estudo de Caso: App yesHEis</h2>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contato" class="footer">
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <span class="logo-name-footer">Pedro</span><span class="logo-lastname">RI</span>
+            </div>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/pedrori/" target="_blank" class="footer-link">LinkedIn</a>
+                <a href="mailto:contato@pedrori.com" class="footer-link">contato@pedrori.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
