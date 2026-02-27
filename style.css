@@ -627,32 +627,41 @@ a {
 .device-toggle {
     display: flex;
     gap: 0.5rem;
+    background: #EAEAEA;
+    padding: 0.35rem;
+    border-radius: 12px;
+}
+
+[data-theme="dark"] .device-toggle {
+    background: #1A1A1A;
 }
 
 .device-btn {
-    border: 1px solid var(--border-color);
+    border: none;
     background: transparent;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-color);
-    transition: all 0.3s ease;
-}
-
-.device-btn:hover {
-    background: rgba(74, 89, 187, 0.05);
-    color: var(--color-primary);
+    opacity: 0.6;
 }
 
 .device-btn.active {
-    background: var(--color-primary);
+    background: #FFFFFF;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+[data-theme="dark"] .device-btn.active {
+    background: #333333;
     color: #FFFFFF;
-    border-color: var(--color-primary);
 }
 
 /* Browser Window Mockup */
