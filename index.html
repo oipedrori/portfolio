@@ -47,7 +47,7 @@
                     </svg>
                 </button>
                 <a href="#projeto-1" class="btn btn-secondary">Ver projetos</a>
-                <a href="#contato" class="btn btn-primary">Contato</a>
+                <a href="mailto:contato@pedrori.com" class="btn btn-primary">Contato</a>
             </div>
         </div>
     </nav>
@@ -403,17 +403,152 @@
             </div>
         </section>
 
-        <section id="projeto-3" class="section projeto fade-in">
-            <div class="container">
+        <section id="projeto-3" class="section projeto bg-light fade-in">
+            <div class="container project-container">
                 <p class="section-label">— PROJETO 3</p>
-                <h2 class="section-title">Workflows de Comunicação Automática</h2>
+                <h2 class="section-title">Workflows de Engajamento no HubSpot</h2>
+
+                <div class="project-description">
+                    <p>Neste projeto, explorei fluxos de automação construídos dentro do <strong>HubSpot</strong> para
+                        dar suporte operacional às campanhas de landing pages focadas em download de assets
+                        evangelísticos (Projeto 2).</p>
+                    <p>Ao conectar dados comportamentais (downloads) a fluxos de comunicação direcionada por e-mail e
+                        WhatsApp, o objetivo foi criar uma jornada contínua e aumentar expressivamente a adesão a novos
+                        materiais.</p>
+                </div>
+
+                <div class="ps-cards">
+                    <div class="ps-card">
+                        <div class="ps-icon">❌</div>
+                        <div class="ps-content">
+                            <h3>O Problema</h3>
+                            <p>Os dados do HubSpot mostraram que muitos usuários baixavam apenas o primeiro asset de uma
+                                campanha e não retornavam para utilizar os demais materiais complementares disponíveis,
+                                reduzindo o LTV (Lifetime Value) da campanha e o impacto da jornada educacional
+                                pretendida.</p>
+                        </div>
+                    </div>
+                    <div class="ps-card">
+                        <div class="ps-icon">✅</div>
+                        <div class="ps-content">
+                            <h3>A Solução</h3>
+                            <p>A solução estratégica envolveu mapear e construir workflows comportamentais que
+                                identificavam o último download do usuário, disparando então comunicações personalizadas
+                                e sequenciais nos dias seguintes para relembrar o material anterior e promover o acesso
+                                orgânico aos outros assets não baixados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <iframe style="border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 12px; margin-top: 2rem;"
+                    width="100%" height="600"
+                    src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FFakNJf0uOVkcrGsqhBxdr5%2FPortf%25C3%25B3lio%3Fnode-id%3D131-298%26t%3D9AFgYHfFKy7xzINJ-4"
+                    allowfullscreen></iframe>
             </div>
         </section>
 
         <section id="projeto-4" class="section projeto fade-in">
-            <div class="container">
+            <div class="container project-container">
                 <p class="section-label">— PROJETO 4</p>
-                <h2 class="section-title">Estudo de Caso: App yesHEis</h2>
+                <h2 class="section-title">Auditoria Heurística de UX: App yesHEis</h2>
+
+                <div class="project-description">
+                    <p>O <strong>yesHEis</strong> é um aplicativo global da CV voltado ao evangelismo e ao discipulado
+                        prático, oferecendo vídeos, minicursos, desafios e uma comunidade ativa. Seu objetivo é ajudar
+                        cristãos a ganharem confiança para compartilhar sua fé no cotidiano.</p>
+                    <p>Neste estudo de caso, realizei uma <strong>Avaliação Heurística de UX</strong> focada na Aba de
+                        Cursos do aplicativo, utilizando como parâmetro as 10 Heurísticas de Nielsen (avaliação de
+                        especialista). O objetivo foi mapear atritos que impedem os usuários de manterem um ritmo
+                        consistente de aprendizado e transformação de intenção em prática.</p>
+                </div>
+
+                <div class="bento-masonry">
+                    <!-- img-left -->
+                    <div class="bento-card bento-img-card" style="grid-area: img-left;">
+                        <img src="assets/yesheis_home.png" alt="Interface Principal yesHEis" class="bento-img">
+                    </div>
+
+                    <!-- acessibilidade -->
+                    <div class="bento-card text-card" style="grid-area: acessibilidade;">
+                        <h3><span class="heuristic-icon">♿</span> Acessibilidade</h3>
+                        <span class="heuristic-tag orange">Gravidade 2 (Menor)</span>
+                        <div class="bento-desc">
+                            <p><strong>Violação:</strong> Telas internas usam imagem com texto
+                                embutido<br>(Heurística 5).</p>
+                            <p><strong>Solução:</strong> Desenvolver os quadros em componentes HTML e SVG reais para
+                                perfeita leitura de tela.</p>
+                        </div>
+                    </div>
+
+                    <!-- descoberta -->
+                    <div class="bento-card text-card" style="grid-area: descoberta;">
+                        <h3><span class="heuristic-icon">🔍</span> Descoberta e Filtros</h3>
+                        <span class="heuristic-tag red">Gravidade 3 (Maior)</span>
+                        <div class="bento-desc">
+                            <p><strong>Violação:</strong> Lista ampla de cursos sem opções de filtragem, ordenação
+                                ou busca por palavra-chave<br>(Heurística 6).</p>
+                            <p><strong>Solução:</strong> Implementar filtros verticais, ordenação por novidade e
+                                barra de busca direta.</p>
+                        </div>
+                    </div>
+
+                    <!-- navegacao -->
+                    <div class="bento-card text-card" style="grid-area: navegacao;">
+                        <h3><span class="heuristic-icon">⬅️</span> Navegação nos Cursos</h3>
+                        <span class="heuristic-tag orange">Gravidade 2 (Menor)</span>
+                        <div class="bento-desc">
+                            <p><strong>Violação:</strong> Estilo stories que permite apenas avançar<br>(Heurística 3).
+                            </p>
+                            <p><strong>Solução:</strong> Permitir clique à esquerda para retroceder e adicionar
+                                botões persistentes de voltar.</p>
+                        </div>
+                    </div>
+
+                    <!-- sugestao -->
+                    <div class="bento-card text-card" style="grid-area: sugestao;">
+                        <h3 class="product-title"><span class="heuristic-icon">⏭️</span> Sugestão: "Continue de onde
+                            parou"</h3>
+                        <span class="heuristic-tag purple">Iniciativa de Produto</span>
+                        <div class="bento-desc">
+                            <p>Incluir um bloco persistente "Continuar Aprendendo" no topo da área da Aba Cursos,
+                                contendo o último treinamento acessado com a porcentagem de progresso visual de
+                                forma eficiente.</p>
+                        </div>
+                    </div>
+
+                    <!-- ajuda -->
+                    <div class="bento-card text-card" style="grid-area: ajuda;">
+                        <h3><span class="heuristic-icon">❓</span> Ajuda e Docs</h3>
+                        <span class="heuristic-tag red">Gravidade 3 (Maior)</span>
+                        <div class="bento-desc">
+                            <p><strong>Violação:</strong> Dúvidas como progressos e certificados sem
+                                resposta<br>(Heurística 10).</p>
+                            <p><strong>Solução:</strong> Criar um bloco expansível ou Modal "Como funcionam os cursos?"
+                                no topo da grade.</p>
+                        </div>
+                    </div>
+
+                    <!-- img-right -->
+                    <div class="bento-card bento-img-card" style="grid-area: img-right;">
+                        <img src="assets/yesheis_courses.png" alt="Aba de Cursos yesHEis" class="bento-img">
+                    </div>
+                </div>
+
+                <div class="bento-bottom-row">
+                    <!-- Maior Desafio Horizontal -->
+                    <div class="bento-card hero-card horizontal">
+                        <div class="hero-content">
+                            <h3 class="hero-title-bento">O Maior Desafio</h3>
+                            <p>A falta de filtros, sistema de busca e um mecanismo de "continue de onde parou" força o
+                                usuário a memorizar seu progresso, aumentando significativamente a carga cognitiva e o
+                                tempo de navegação na aba de estudos.</p>
+                        </div>
+                        <div class="hero-footer">
+                            <span class="heuristic-tag blue"><span class="tag-icon">⏳</span> Heurística 7 e 10
+                                Violadas</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
