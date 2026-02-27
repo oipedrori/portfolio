@@ -8,31 +8,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check saved theme or system preference
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.body.setAttribute('data-theme', 'dark');
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
-    } else {
-        document.body.setAttribute('data-theme', 'light');
-        sunIcon.style.display = 'block';
-        moonIcon.style.display = 'none';
-    }
-
-    // Toggle theme on click
-    themeToggleBtn.addEventListener('click', () => {
-        if (document.body.getAttribute('data-theme') === 'light') {
-            document.body.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
+    // Function to apply theme
+    function applyTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        if (theme === 'dark') {
             sunIcon.style.display = 'none';
             moonIcon.style.display = 'block';
         } else {
-            document.body.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
             sunIcon.style.display = 'block';
             moonIcon.style.display = 'none';
         }
+    }
+
+    // Initial load
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else {
+        applyTheme(systemPrefersDark.matches ? 'dark' : 'light');
+    }
+
+    // Listen to system changes dynamically
+    systemPrefersDark.addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            applyTheme(e.matches ? 'dark' : 'light');
+        }
+    });
+
+    // Toggle theme on click
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = document.body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+        applyTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
     });
 
     /* ---------------------------------------------------- */
