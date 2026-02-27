@@ -538,10 +538,6 @@ a {
         font-size: 2.5rem;
     }
 
-    .nav-links .btn {
-        display: none;
-    }
-
     .nav-links .theme-toggle {
         display: flex;
     }
@@ -810,12 +806,25 @@ a {
         align-items: center;
     }
 
-    .campaign-tabs,
-    .device-toggle {
+    .campaign-tabs {
         justify-content: center;
         width: 100%;
         max-width: 100%;
         flex-wrap: wrap;
+    }
+
+    .device-toggle {
+        display: none !important;
+    }
+
+    .mobile-warning-msg {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--text-color);
+        opacity: 0.7;
+        text-align: center;
+        margin-top: 1rem;
+        font-style: italic;
     }
 
     .browser-mockup.mobile-mode {
@@ -830,6 +839,10 @@ a {
         flex: 1;
         justify-content: center;
     }
+}
+
+.mobile-warning-msg {
+    display: none;
 }
 
 /* Wireframe Skeleton Mode */
