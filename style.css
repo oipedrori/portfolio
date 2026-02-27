@@ -638,11 +638,9 @@ a {
 /* Responsividade do Bento Masonry */
 @media (max-width: 900px) {
     .bento-masonry {
+        display: flex;
         flex-direction: column;
-    }
-
-    .bento-col {
-        width: 100%;
+        align-items: stretch;
     }
 
     .hero-card.horizontal {
