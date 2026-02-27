@@ -807,6 +807,15 @@ a {
 @media (max-width: 768px) {
     .showcase-controls {
         flex-direction: column;
+        align-items: center;
+    }
+
+    .campaign-tabs,
+    .device-toggle {
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+        flex-wrap: wrap;
     }
 
     .browser-mockup.mobile-mode {
@@ -814,9 +823,12 @@ a {
         /* Em telas pequenas o mockmobile ocupa 100% da telinha do usuario */
     }
 
-    .tab-btn {
+    .tab-btn,
+    .device-btn {
         padding: 0.5rem;
         font-size: 0.85rem;
+        flex: 1;
+        justify-content: center;
     }
 }
 

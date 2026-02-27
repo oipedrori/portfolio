@@ -147,6 +147,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inicialização
     if (tabBtns.length > 0) {
+        // Checar se é mobile no load para definir o device padrão
+        if (window.innerWidth <= 768) {
+            currentDevice = 'mobile';
+            deviceBtns.forEach(btn => {
+                if (btn.dataset.device === 'mobile') {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
         updateShowcase();
     }
 
