@@ -104,7 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
         mockupUrl.textContent = urls[currentCampaign];
 
         // Atualizar Dimensões do Browser (Animado via CSS transiton width)
-        browserWindow.className = `browser-mockup ${currentDevice}-mode`;
+        if (currentDevice === 'mobile') {
+            browserWindow.className = `browser-mockup mobile-mode`;
+        } else {
+            browserWindow.className = `browser-mockup desktop-mode`;
+        }
 
         // Esconder todas imagens
         mockupImgs.forEach(img => img.classList.remove('active'));
