@@ -124,10 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ---------------------------------------------------- */
     /* 5. Sticky Scroll Blur Effect                         */
     /* ---------------------------------------------------- */
+    let isTicking = false;
+
     function updateStickyBlur() {
         const cards = document.querySelectorAll('.projeto');
         const headerOffset = 100;
         const windowHeight = window.innerHeight;
+        // Detecta se é mobile para desativar o filtro de Blur pesado que causa engasgos
+        const isMobile = window.innerWidth <= 768;
 
         for (let i = 0; i < cards.length; i++) {
             const currentCard = cards[i];
@@ -149,12 +153,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const progress = 1 - ((nextTop - headerOffset) / (windowHeight - headerOffset));
 
                 // Aplicar os efeitos proporcionais
-                currentCard.style.filter = `blur(${progress * 8}px)`; // Max blur: 8px
+                const blurValue = isMobile ? 0 : (progress * 8); // Sem blur em celulares
+                currentCard.style.filter = `blur(${blurValue}px)`;
                 currentCard.style.transform = `scale3d(${1 - (progress * 0.05)}, ${1 - (progress * 0.05)}, 1) translateZ(0)`; // Escala reduz até 0.95
                 currentCard.style.opacity = '1'; // Sem transparência!
             } else if (nextTop < headerOffset) {
                 // Totalmente coberto pelo próximo cartão
-                currentCard.style.filter = `blur(8px)`;
+                const blurValue = isMobile ? 0 : 8;
+                currentCard.style.filter = `blur(${blurValue}px)`;
                 currentCard.style.transform = `scale3d(0.95, 0.95, 1) translateZ(0)`;
                 currentCard.style.opacity = `1`;
             } else {
@@ -164,11 +170,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentCard.style.opacity = `1`;
             }
         }
+        isTicking = false;
     }
 
-    // Ouvinte para atualizar o Blur em tempo real durante o scroll
-    window.addEventListener('scroll', updateStickyBlur, { passive: true });
-    window.addEventListener('resize', updateStickyBlur);
+    // Ouvinte para atualizar os efeitos em tempo real durante o scroll com otimização GPU
+    window.addEventListener('scroll', () => {
+        if (!isTicking) {
+            window.requestAnimationFrame(updateStickyBlur);
+            isTicking = true;
+        }
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+        if (!isTicking) {
+            window.requestAnimationFrame(updateStickyBlur);
+            isTicking = true;
+        }
+    });
+
     updateStickyBlur(); // Call once initially
     /* ---------------------------------------------------- */
     /* 6. Showcase Interativo (Projeto 2)                   */
