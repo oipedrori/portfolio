@@ -134,8 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Se for o último cartão, ele nunca é borrado por outro
             if (i === cards.length - 1) {
-                currentCard.style.filter = 'blur(0px)';
-                currentCard.style.transform = 'scale(1)';
+                currentCard.style.filter = 'blur(0px) brightness(1)';
+                currentCard.style.transform = 'scale3d(1, 1, 1) translateZ(0)';
                 currentCard.style.opacity = '1';
                 continue;
             }
@@ -149,18 +149,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const progress = 1 - ((nextTop - headerOffset) / (windowHeight - headerOffset));
 
                 // Aplicar os efeitos proporcionais
-                currentCard.style.filter = `blur(${progress * 8}px)`; // Max blur: 8px
-                currentCard.style.transform = `scale(${1 - (progress * 0.05)})`; // Escala reduz até 0.95
-                currentCard.style.opacity = `${1 - (progress * 0.4)}`; // Opacidade cai até 0.6
+                currentCard.style.filter = `blur(${progress * 8}px) brightness(${1 - (progress * 0.3)})`; // Max blur: 8px | Brilho reduz 30%
+                currentCard.style.transform = `scale3d(${1 - (progress * 0.05)}, ${1 - (progress * 0.05)}, 1) translateZ(0)`; // Escala reduz até 0.95
+                currentCard.style.opacity = '1'; // Sem transparência!
             } else if (nextTop < headerOffset) {
                 // Totalmente coberto pelo próximo cartão
-                currentCard.style.filter = `blur(8px)`;
-                currentCard.style.transform = `scale(0.95)`;
-                currentCard.style.opacity = `0.6`;
+                currentCard.style.filter = `blur(8px) brightness(0.7)`;
+                currentCard.style.transform = `scale3d(0.95, 0.95, 1) translateZ(0)`;
+                currentCard.style.opacity = `1`;
             } else {
                 // Próximo cartão ainda não chegou
-                currentCard.style.filter = `blur(0px)`;
-                currentCard.style.transform = `scale(1)`;
+                currentCard.style.filter = `blur(0px) brightness(1)`;
+                currentCard.style.transform = `scale3d(1, 1, 1) translateZ(0)`;
                 currentCard.style.opacity = `1`;
             }
         }
