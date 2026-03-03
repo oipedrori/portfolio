@@ -454,6 +454,8 @@ main {
     /* Sombra para o efeito de sobreposição */
     border-top: 1px solid var(--border-color);
     /* Borda sutil */
+    transform-origin: center top;
+    will-change: transform, filter, opacity;
 }
 
 /* Para alternar os z-index permitindo que eles sobreponham na ordem correta */

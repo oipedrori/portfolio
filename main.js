@@ -122,6 +122,55 @@ document.addEventListener('DOMContentLoaded', () => {
     updateStickyCards();
 
     /* ---------------------------------------------------- */
+    /* 5. Sticky Scroll Blur Effect                         */
+    /* ---------------------------------------------------- */
+    function updateStickyBlur() {
+        const cards = document.querySelectorAll('.projeto');
+        const headerOffset = 100;
+        const windowHeight = window.innerHeight;
+
+        for (let i = 0; i < cards.length; i++) {
+            const currentCard = cards[i];
+
+            // Se for o último cartão, ele nunca é borrado por outro
+            if (i === cards.length - 1) {
+                currentCard.style.filter = 'blur(0px)';
+                currentCard.style.transform = 'scale(1)';
+                currentCard.style.opacity = '1';
+                continue;
+            }
+
+            const nextCard = cards[i + 1];
+            const nextTop = nextCard.getBoundingClientRect().top;
+
+            // O próximo cartão começa a aparecer a partir do fundo da tela
+            // E cobre totalmente "em cima" quando nextTop <= headerOffset
+            if (nextTop <= windowHeight && nextTop >= headerOffset) {
+                const progress = 1 - ((nextTop - headerOffset) / (windowHeight - headerOffset));
+
+                // Aplicar os efeitos proporcionais
+                currentCard.style.filter = `blur(${progress * 8}px)`; // Max blur: 8px
+                currentCard.style.transform = `scale(${1 - (progress * 0.05)})`; // Escala reduz até 0.95
+                currentCard.style.opacity = `${1 - (progress * 0.4)}`; // Opacidade cai até 0.6
+            } else if (nextTop < headerOffset) {
+                // Totalmente coberto pelo próximo cartão
+                currentCard.style.filter = `blur(8px)`;
+                currentCard.style.transform = `scale(0.95)`;
+                currentCard.style.opacity = `0.6`;
+            } else {
+                // Próximo cartão ainda não chegou
+                currentCard.style.filter = `blur(0px)`;
+                currentCard.style.transform = `scale(1)`;
+                currentCard.style.opacity = `1`;
+            }
+        }
+    }
+
+    // Ouvinte para atualizar o Blur em tempo real durante o scroll
+    window.addEventListener('scroll', updateStickyBlur, { passive: true });
+    window.addEventListener('resize', updateStickyBlur);
+    updateStickyBlur(); // Call once initially
+    /* ---------------------------------------------------- */
     /* 6. Showcase Interativo (Projeto 2)                   */
     /* ---------------------------------------------------- */
     const tabBtns = document.querySelectorAll('.tab-btn');
