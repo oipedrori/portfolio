@@ -858,8 +858,6 @@ main {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 
     border-radius: 32px 32px 0 0;
-    max-width: 1400px;
-    margin: 0 auto;
 }
 
 .footer-container {
