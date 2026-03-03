@@ -238,6 +238,65 @@ a {
     color: var(--text-color);
 }
 
+.animated-underline {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+
+.animated-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -0.1em;
+    /* Deslocado para baixo da palavra */
+    left: 0;
+    width: 100%;
+    height: 0.12em;
+    /* Metade da espessura (mais estreito verticalmente) */
+    background-color: rgba(74, 89, 187, 0.4);
+    /* Azul claro um pouco mais visível pra compensar a espessura fina */
+    border-radius: 4px;
+    z-index: -1;
+    animation: underlineLoop 4s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+}
+
+@keyframes underlineLoop {
+    0% {
+        transform-origin: left;
+        transform: scaleX(0);
+    }
+
+    12.5% {
+        /* 0.5s de 4s */
+        transform-origin: left;
+        transform: scaleX(1);
+    }
+
+    62.5% {
+        /* Fica por 2s (de 0.5s até 2.5s) */
+        transform-origin: left;
+        transform: scaleX(1);
+    }
+
+    62.6% {
+        /* Troca a origem invisivelmente */
+        transform-origin: right;
+        transform: scaleX(1);
+    }
+
+    75% {
+        /* Some indo pra direita (0.5s de 2.5s até 3.0s) */
+        transform-origin: right;
+        transform: scaleX(0);
+    }
+
+    100% {
+        /* Fica invisivel por 1s (de 3.0s até 4.0s) */
+        transform-origin: right;
+        transform: scaleX(0);
+    }
+}
+
 .hero-description {
     font-size: 1.15rem;
     color: var(--text-muted);
@@ -307,14 +366,7 @@ a {
     border-radius: 20px;
 }
 
-#profile-img:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-}
 
-[data-theme="dark"] #profile-img:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
 
 .sobre-content p {
     margin-bottom: 1.5rem;
@@ -382,13 +434,58 @@ a {
 }
 
 /* Projetos - Layout comum */
+main {
+    position: relative;
+    /* Required for sticky children */
+}
+
 .projeto {
     padding: 100px 0;
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--bg-color);
+    /* Fallback */
+    z-index: 1;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.05);
+    /* Sombra para o efeito de sobreposição */
+    border-top: 1px solid var(--border-color);
+    /* Borda sutil */
+}
+
+/* Para alternar os z-index permitindo que eles sobreponham na ordem correta */
+#projeto-1 {
+    z-index: 2;
+}
+
+#projeto-2 {
+    z-index: 3;
+}
+
+#projeto-3 {
+    z-index: 4;
+}
+
+#projeto-4 {
+    z-index: 5;
+}
+
+/* Remove a sombra do primeiro para não ficar estranho quando ele chega até o topo */
+#projeto-1 {
+    box-shadow: none;
+    border-top: none;
+}
+
+.project-header {
+    margin-bottom: 2rem;
 }
 
 .project-description {
     max-width: 800px;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 .project-description p {
@@ -451,7 +548,7 @@ a {
 /* Figma Embed */
 .figma-embed {
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 0;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -481,14 +578,13 @@ a {
         "img-left navegacao img-right"
         "acessibilidade sugestao img-right";
     gap: 1.5rem;
-    margin-top: 2.5rem;
+    margin-top: 0;
 }
 
 .bento-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -516,6 +612,7 @@ a {
     height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: 20px;
 }
 
 /* Text Cards e Hero Card (O Maior Desafio) */
@@ -577,6 +674,74 @@ a {
 
 .bento-desc strong {
     font-weight: 700;
+}
+
+/* Tooltip Heurísticas */
+.heuristic-tooltip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.8rem;
+    margin-top: 0.4rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    background: rgba(74, 89, 187, 0.1);
+    cursor: help;
+    position: relative;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.heuristic-tooltip:hover {
+    background: rgba(74, 89, 187, 0.2);
+    transform: translateY(-2px);
+}
+
+.heuristic-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Seta do balãozinho */
+.heuristic-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    border-width: 6px;
+    border-style: solid;
+    border-color: var(--card-bg) transparent transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    z-index: 11;
+    pointer-events: none;
+    margin-bottom: -11px;
+}
+
+.heuristic-tooltip:hover::after,
+.heuristic-tooltip:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 /* Tags de Gravidade */
@@ -774,7 +939,7 @@ a {
 }
 
 .showcase-container {
-    margin-top: 2rem;
+    margin-top: 0;
     background: #F8F9FA;
     border: 1px solid var(--border-color);
     border-radius: 16px;

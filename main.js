@@ -90,6 +90,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 100);
 
+    /* ---------------------------------------------------- */
+    /* 4. Sticky Scroll for Projetos                        */
+    /* ---------------------------------------------------- */
+    function updateStickyCards() {
+        const headerOffset = 100; // Espaço do navbar
+        const cards = document.querySelectorAll('.projeto');
+
+        cards.forEach(card => {
+            const cardHeight = card.offsetHeight;
+            const windowHeight = window.innerHeight;
+
+            if (cardHeight > windowHeight - headerOffset) {
+                // Cartão maior que a tela: gruda apenas quando o final do cartão atingir o final da tela
+                const topOffset = windowHeight - cardHeight;
+                card.style.top = `${topOffset}px`;
+            } else {
+                // Cartão menor ou igual à tela: gruda logo abaixo do navbar
+                card.style.top = `${headerOffset}px`;
+            }
+        });
+    }
+
+    // Atualiza nos eventos de resize e load da página
+    window.addEventListener('resize', updateStickyCards);
+    window.addEventListener('load', () => {
+        updateStickyCards();
+        setTimeout(updateStickyCards, 500); // Garante o cálculo após carregar imagens
+    });
+    // Executa imediatamente no DOM load
+    updateStickyCards();
 
     /* ---------------------------------------------------- */
     /* 6. Showcase Interativo (Projeto 2)                   */
