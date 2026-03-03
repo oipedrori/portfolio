@@ -450,10 +450,18 @@ main {
     background-color: var(--bg-color);
     /* Fallback */
     z-index: 1;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.05);
-    /* Sombra para o efeito de sobreposição */
-    border-top: 1px solid var(--border-color);
-    /* Borda sutil */
+    box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.08);
+    /* Sombra mais acentuada para destacar o card */
+    border: 1px solid var(--border-color);
+    /* Borda em todo o card */
+    border-bottom: none;
+    border-radius: 32px 32px 0 0;
+    /* Arredondado apenas em cima */
+    max-width: 1400px;
+    /* Não ocupa 100% da tela */
+    margin: 0 auto;
+    /* Centraliza as margens no Desktop */
+
     transform-origin: center top;
     will-change: transform, filter, opacity;
 }
@@ -1471,7 +1479,25 @@ main {
 }
 
 .wf-text-area.align-center .wf-line.sm {
-    width: 50%;
+    width: 60%;
+}
+
+@media (max-width: 1440px) {
+    .projeto {
+        max-width: 95%;
+        /* Uma margem menor no Desktop/Laptop menores */
+    }
+}
+
+@media (max-width: 768px) {
+    .projeto {
+        max-width: 100%;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 .wf-button.center-btn {
