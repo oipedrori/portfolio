@@ -483,11 +483,6 @@ main {
     z-index: 5;
 }
 
-/* Remove a sombra do primeiro para não ficar estranho quando ele chega até o topo */
-#projeto-1 {
-    box-shadow: none;
-    border-top: none;
-}
 
 .project-header {
     margin-bottom: 2rem;
