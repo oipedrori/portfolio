@@ -17,9 +17,23 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Inline script to set theme immediately before page renders, preventing flash -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        } else if (systemPrefersDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
 </head>
 
-<body data-theme="light">
+<body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -557,13 +571,15 @@
                             <h3 class="hero-title-bento">O Maior Desafio</h3>
                             <p>Identificou-se que a ausência de modelos mentais de continuidade ('continue de onde
                                 parou')
-                                e de filtragem eficiente estava sobrecarregando severamente a carga cognitiva do usuário
-                                (Heurísticas de Reconhecimento e Eficiência de Nielsen). Essa fricção na retomada dos
-                                estudos comprometia diretamente as métricas de retenção funcional (DAU/MAU) da aba.
+                                e de filtragem eficiente estava sobrecarregando severamente a carga cognitiva do
+                                usuário.
+                                Essa fricção na retomada dos estudos comprometia diretamente as métricas de retenção
+                                funcional (DAU/MAU) da aba.
                             </p>
                         </div>
                         <div class="hero-footer">
-                            <span class="heuristic-tag blue"> Heurística 7 e 10
+                            <span class="heuristic-tag blue heuristic-tooltip"
+                                data-tooltip="H7: Eficiência de uso | H10: Ajuda e documentação"> Heurística 7 e 10
                                 Violadas</span>
                         </div>
                     </div>

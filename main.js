@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to apply theme
     function applyTheme(theme) {
-        document.body.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-theme', theme);
         if (theme === 'dark') {
             sunIcon.style.display = 'none';
             moonIcon.style.display = 'block';
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Toggle theme on click
     themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = document.body.getAttribute('data-theme');
+        const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
 
         applyTheme(newTheme);
@@ -377,5 +377,118 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    /* ---------------------------------------------------- */
+    /* 8. Magnetic Hover Elements                           */
+    /* ---------------------------------------------------- */
+    // Apenas botões da hero e tags da bio terão magnetismo, navbar não.
+    const magneticElements = document.querySelectorAll('.hero .btn, .sobre-content .tag');
+    magneticElements.forEach(elem => {
+        elem.addEventListener('mousemove', (e) => {
+            const rect = elem.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            elem.style.transition = 'transform 0.1s ease-out';
+            elem.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+        });
+
+        elem.addEventListener('mouseleave', () => {
+            elem.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+            elem.style.transform = `translate(0px, 0px)`;
+
+            setTimeout(() => {
+                elem.style.transition = '';
+                elem.style.transform = '';
+            }, 500);
+        });
+    });
+
+    /* ---------------------------------------------------- */
+    /* 9. Interactive Grid (Hero)                           */
+    /* ---------------------------------------------------- */
+    const heroSection = document.getElementById('hero');
+    if (heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            // Salva coordenadas como variáveis CSS
+            heroSection.style.setProperty('--mouse-x', `${x}px`);
+            heroSection.style.setProperty('--mouse-y', `${y}px`);
+        });
+    }
+
+    /* ---------------------------------------------------- */
+    /* 10. 3D Tilt Effect on Bento Cards                    */
+    /* ---------------------------------------------------- */
+    const tiltCards = document.querySelectorAll('.bento-card, .ps-card');
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -4; // max tilt degrees
+            const rotateY = ((x - centerX) / centerX) * 4;
+
+            card.style.transition = 'transform 0.1s ease-out, box-shadow 0.1s ease-out';
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            card.style.zIndex = '10'; // Elevando proximo card enquanto hover (tilt effect over others)
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            card.style.zIndex = '1';
+
+            setTimeout(() => {
+                card.style.transition = '';
+                card.style.transform = '';
+                card.style.zIndex = '';
+            }, 500);
+        });
+    });
+
+    // Sensor de Orientação para Mobile (Giroscópio)
+    // Permite que os cards inclinem fisicamente ao mover o celular
+    let isMobileDevice = false;
+
+    // Pequeno truque para detectar se é um dispositivo touch (provavelmente mobile/tablet)
+    if (window.matchMedia("(pointer: coarse)").matches || 'ontouchstart' in window) {
+        isMobileDevice = true;
+    }
+
+    if (isMobileDevice) {
+        // As vezes iOS pede permissão explícita para o giroscópio, mas em muitos Androids/iOS mais antigos funciona direto.
+        // O efeito será contínuo em todos os tiltCards visíveis na tela
+        window.addEventListener('deviceorientation', (e) => {
+            if (!e.beta || !e.gamma) return;
+
+            // beta: tilt front/back [-180, 180] -> limitaremos para o efeito
+            // gamma: tilt left/right [-90, 90]
+
+            // Limitando a inclinação para algo confortável visualmente (max 10-15 graus dependendo de como o usuário segura)
+            // Valores bases ideais (celular na mão levemente inclinado para cima)
+            let xTilt = (e.beta - 45) / 5; // Assumindo base de 45 graus na mão 
+            let yTilt = e.gamma / 4;
+
+            // Teto de rotação para evitar que o card vire de cabeça para baixo
+            xTilt = Math.max(-8, Math.min(8, xTilt));
+            yTilt = Math.max(-10, Math.min(10, yTilt));
+
+            tiltCards.forEach(card => {
+                // Checar se o card está visível antes de animar para poupar bateria/GPU
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    card.style.transform = `perspective(1000px) rotateX(${-xTilt}deg) rotateY(${yTilt}deg)`;
+                    card.style.boxShadow = `${-yTilt * 2}px ${xTilt * 2 + 10}px 25px rgba(0, 0, 0, 0.1)`;
+                }
+            });
+        });
+    }
 
 });
