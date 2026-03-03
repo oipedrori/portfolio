@@ -470,6 +470,7 @@ main {
 /* Para alternar os z-index permitindo que eles sobreponham na ordem correta */
 #sobre {
     z-index: 1;
+    background-color: var(--card-bg);
 }
 
 #projeto-1 {
