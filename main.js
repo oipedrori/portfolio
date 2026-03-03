@@ -153,13 +153,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const progress = 1 - ((nextTop - headerOffset) / (windowHeight - headerOffset));
 
                 // Aplicar os efeitos proporcionais
-                const blurValue = isMobile ? 0 : (progress * 8); // Sem blur em celulares
+                const blurValue = progress * 8; // Restaurado Blur em todas as telas
                 currentCard.style.filter = `blur(${blurValue}px)`;
                 currentCard.style.transform = `scale3d(${1 - (progress * 0.05)}, ${1 - (progress * 0.05)}, 1) translateZ(0)`; // Escala reduz até 0.95
                 currentCard.style.opacity = '1'; // Sem transparência!
             } else if (nextTop < headerOffset) {
                 // Totalmente coberto pelo próximo cartão
-                const blurValue = isMobile ? 0 : 8;
+                const blurValue = 8;
                 currentCard.style.filter = `blur(${blurValue}px)`;
                 currentCard.style.transform = `scale3d(0.95, 0.95, 1) translateZ(0)`;
                 currentCard.style.opacity = `1`;
