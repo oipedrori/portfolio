@@ -460,6 +460,7 @@ main {
     max-width: 1400px;
     /* Não ocupa 100% da tela */
     margin: 0 auto;
+    margin-bottom: 25vh;
     /* Centraliza as margens no Desktop */
 
     transform-origin: center top;
@@ -485,6 +486,7 @@ main {
 
 #projeto-4 {
     z-index: 5;
+    margin-bottom: 0;
 }
 
 
@@ -1497,6 +1499,62 @@ main {
         padding-left: 0;
         padding-right: 0;
     }
+}
+
+/* ---------------------------------------------------- */
+/* Custom Cursor Navigation                             */
+/* ---------------------------------------------------- */
+.custom-nav-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+    transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.custom-nav-cursor.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.custom-nav-cursor svg {
+    width: 20px;
+    height: 20px;
+    stroke: white;
+    stroke-width: 2.5;
+    fill: none;
+    transition: transform 0.2s ease;
+}
+
+/* Setinhas (default up, class down reseta) */
+.custom-nav-cursor svg path {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    d: path("M18 24L18 12M18 12L12 18M18 12L24 18");
+    /* Up */
+}
+
+.custom-nav-cursor.down svg {
+    transform: rotate(180deg);
+}
+
+/* Ocultar o cursor nativo apenas quando o DOM cursor estiver ativo */
+.hide-native-cursor {
+    cursor: none !important;
+}
+
+.hide-native-cursor * {
+    cursor: none !important;
 }
 
 .wf-button.center-btn {

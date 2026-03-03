@@ -269,4 +269,113 @@ document.addEventListener('DOMContentLoaded', () => {
         updateShowcase();
     }
 
+    /* ---------------------------------------------------- */
+    /* 7. Section Navigation Cues (Bottom 30%)              */
+    /* ---------------------------------------------------- */
+    // Juntar o Hero e as seções de projetos em uma NodeList ou Array
+    const navSections = [document.getElementById('hero'), ...document.querySelectorAll('.projeto')];
+    const sectionIds = navSections.map(s => s.id);
+
+    // Create the custom cursor element
+    const customCursor = document.createElement('div');
+    customCursor.classList.add('custom-nav-cursor', 'down'); // Start facing down by default
+    customCursor.innerHTML = `<svg viewBox="0 0 36 36"><path></path></svg>`;
+    document.body.appendChild(customCursor);
+
+    let isHoveringNavArea = false;
+
+    // Move the custom cursor with the mouse
+    document.addEventListener('mousemove', (e) => {
+        if (isHoveringNavArea) {
+            customCursor.style.left = `${e.clientX}px`;
+            customCursor.style.top = `${e.clientY}px`;
+        }
+    });
+
+    navSections.forEach((section, index) => {
+        if (!section) return; // Segurança
+
+        section.addEventListener('mousemove', (e) => {
+            // Ignorar elementos clicáveis (botões, abas, links, etc.)
+            const isClickable = e.target.closest('a, button, iframe, .tab-btn, .device-btn, .theme-toggle');
+            if (isClickable) {
+                isHoveringNavArea = false;
+                customCursor.classList.remove('active');
+                document.body.classList.remove('hide-native-cursor');
+                section.dataset.navHover = '';
+                return;
+            }
+
+            const rect = section.getBoundingClientRect();
+            // A posição real do mouse dentro do bloco visível
+            const y = e.clientY - rect.top;
+            const height = rect.height;
+
+            const isBottomMargin = y > height * 0.7;
+
+            let navHover = '';
+
+            // Next section se não for a última e se o mouse estiver embaixo
+            if (isBottomMargin && index < navSections.length - 1) {
+                navHover = 'next';
+            }
+
+            if (navHover) {
+                isHoveringNavArea = true;
+                customCursor.classList.add('active');
+                document.body.classList.add('hide-native-cursor');
+                section.dataset.navHover = navHover;
+            } else {
+                isHoveringNavArea = false;
+                customCursor.classList.remove('active');
+                document.body.classList.remove('hide-native-cursor');
+                section.dataset.navHover = '';
+            }
+        });
+
+        section.addEventListener('mouseleave', () => {
+            isHoveringNavArea = false;
+            customCursor.classList.remove('active');
+            document.body.classList.remove('hide-native-cursor');
+            section.dataset.navHover = '';
+        });
+
+        section.addEventListener('click', (e) => {
+            const navHover = section.dataset.navHover;
+            if (navHover) {
+                const isClickable = e.target.closest('a, button, iframe, .tab-btn, .device-btn, .theme-toggle');
+                if (!isClickable) {
+                    // Hide cursor immediately on click to prevent stuttering
+                    isHoveringNavArea = false;
+                    customCursor.classList.remove('active');
+                    document.body.classList.remove('hide-native-cursor');
+                    section.dataset.navHover = '';
+
+                    const headerOffset = 100; // Espaço do navbar (from updateStickyCards)
+
+                    // Helper para achar o offset absoluto ignorando o efeito sticky visual
+                    const getAbsoluteTop = (el) => {
+                        let top = 0;
+                        while (el) {
+                            top += el.offsetTop;
+                            el = el.offsetParent;
+                        }
+                        return top;
+                    };
+
+                    if (navHover === 'next' && index < navSections.length - 1) {
+                        const targetElement = document.getElementById(sectionIds[index + 1]);
+                        if (targetElement) {
+                            const topOffset = getAbsoluteTop(targetElement) - headerOffset;
+                            window.scrollTo({
+                                top: topOffset,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                }
+            }
+        });
+    });
+
 });
