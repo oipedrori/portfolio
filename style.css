@@ -478,7 +478,7 @@ main {
     max-width: 1400px;
     /* Não ocupa 100% da tela */
     margin: 0 auto;
-    margin-bottom: 25vh;
+    margin-bottom: 40vh;
     /* Centraliza as margens no Desktop */
 
     transform-origin: center top;
